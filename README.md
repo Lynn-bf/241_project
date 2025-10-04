@@ -1,5 +1,5 @@
 # 241_project
-Roua Nafeh , lynn Bou Francais, Nadia Bakri
+Roua Nafeh , Lynn Bou Francis, Nadia Bakri
 Connect 4:
 - Two players take turns dropping checkers into a 6x7 grid
 - Checkers fall into the lowest empty spot in a column ( player must choose a column
