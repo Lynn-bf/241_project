@@ -117,7 +117,6 @@ void Multiplayer(char* win, char grid[6][7], bool A){
     while(winner==' ' && !isGridFull(grid)){
         char player = A ? 'A' : 'B'; 
         printf("\nPlayer %c, choose a column (1-7):\n", player);
-        fflush(stdout);
         inputWarning(grid,player);
         displayGrid(grid);
         winner = fourCheckers(grid);
@@ -131,7 +130,6 @@ void easyBot(char* win, char grid[6][7]) {
 
     while (winner == ' ' && !isGridFull(grid)) {
         printf("\nChoose a column (1–7): \n");
-        fflush(stdout);
         inputWarning(grid, 'A');
         displayGrid(grid); // show grid right after player's move
 
@@ -159,12 +157,9 @@ int main(){
     printf("Welcome to Connect Four!");
 
     //printing the modes
-    printf("\nModes:");
+    printf("\nChoose a mode:");
     printf("\n\tMultiplayer:1\n\tEasy:2\n\tMedium:3\n\tHard:4\n");
-
-    //user chooses the mode
-    printf("Enter your choice: ");
-    fflush(stdout);
+    
     int x;
     do{
         
@@ -229,4 +224,5 @@ int main(){
 
     printf("\nScores:\n\033[1;93mA: %d \033[0m- \033[1;31mB: %d \033[0m\n", pointsA, pointsB);
 }
+
 
