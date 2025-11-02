@@ -110,6 +110,20 @@ void inputWarning(char grid[6][7] , char player){
      
 }
 
+// Helper function to find which cell is empty and playable
+int findPlayableCell(int startRow, int startCol, char grid[6][7], char target, int deltaRow, int deltaCol) {
+    //
+    for (int i = 0; i < 4; i++) {
+        int row = startRow + deltaRow*i;
+        int col = startCol + deltaCol*i;
+        if (grid[row][col] == target) {
+            // Check if it's the lowest empty cell in its column
+            if (row == 5 || grid[row+1][col] != ' ')
+                return col;
+        }
+    }
+    return -1;  
+}
 int checkForMedium(char grid[6][7], int deltaRow, int deltaCol) {
     //horizontal: dr=1, dc=0
     //vertical: dr=0, dc=1
@@ -133,35 +147,20 @@ int checkForMedium(char grid[6][7], int deltaRow, int deltaCol) {
 
             // Check for bot winning move
             if (botCount == 3 && emptyCount == 1) {
-                int playCol = findPlayableDiagonalCell(row, col, grid, ' ', -1);
+                int playCol = findPlayableCell(row, col, grid, ' ', -1);
                 if (playCol != -1)
                     return playCol;
             }
 
             // Check for human blocking move
             if (humanCount == 3 && emptyCount == 1) {
-                int blockCol = findPlayableDiagonalCell(row, col, grid, ' ', -1);
+                int blockCol = findPlayableCell(row, col, grid, ' ', -1);
                 if (blockCol != -1)
                     return blockCol;
             }
         }
     }
   return -1; // no move found
-}
-
-// Helper function to find which cell is empty and playable
-int findPlayableCell(int startRow, int startCol, char grid[6][7], char target, int deltaRow, int deltaCol) {
-    //
-    for (int i = 0; i < 4; i++) {
-        int row = startRow + deltaRow*i;
-        int col = startCol + deltaCol*i;
-        if (grid[row][col] == target) {
-            // Check if it's the lowest empty cell in its column
-            if (row == 5 || grid[row+1][col] != ' ')
-                return col;
-        }
-    }
-    return -1;  
 }
 
 void Multiplayer(char* win, char grid[6][7], bool A){
@@ -253,6 +252,7 @@ void mediumBot(char *win,char grid[6][7]){
     }
     *win = winner;
 }
+
 
 
 
