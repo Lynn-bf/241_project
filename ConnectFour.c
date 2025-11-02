@@ -251,7 +251,9 @@ void mediumBot(char *win,char grid[6][7]){
         displayGrid(grid);
         winner = fourCheckers(grid);
     }
+    *win = winner;
 }
+
 
 
 
