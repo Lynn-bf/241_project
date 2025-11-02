@@ -209,6 +209,51 @@ void easyBot(char* win, char grid[6][7]) {
     *win = winner;
 }
 
+void mediumBot(char *win,char grid[6][7]){
+    char winner = *win;
+
+    while (winner == ' ' && !isGridFull(grid)) {
+        printf("\nChoose a column (1–7): \n");
+        fflush(stdout);
+        inputWarning(grid, 'A');
+        displayGrid(grid); // show grid right after player's move
+
+
+        if (winner != ' ' || isGridFull(grid)) break;
+
+        int directions[4][2] = {
+            {1, 0},   // horizontal
+            {0, 1},   // vertical
+            {1, 1},   // diagonal right
+            {1, -1}   // diagonal left
+        };
+        
+        int move = -1;
+        for (int i = 0; i < 4; i++) {
+            int dr = directions[i][0];
+            int dc = directions[i][1];
+            move = checkForMedium(grid, dr, dc);
+            if (move != -1) {
+                placeChecker(grid, move, 'B');
+                break;
+            }
+        }
+        
+        if (move == -1) {
+            // place randomly
+            while (true) {
+                int col = rand() % 7 + 1;
+                int check = placeChecker(grid, col, 'B');
+                if (check == 1) break;
+            }
+        }
+
+        printf("\nBot (B) played:\n");
+        displayGrid(grid);
+        winner = fourCheckers(grid);
+    }
+}
+
 
 
 
