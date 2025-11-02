@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <unistd.h>
+#include <stdbool.h>
 #include "connect4.h"
 
 char fourCheckers(char grid[6][7]){
@@ -154,6 +154,7 @@ void easyBot(char* win, char grid[6][7]) {
 
     *win = winner;
 }
+
 
 
 
