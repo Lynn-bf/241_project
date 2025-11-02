@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include "connect4.h"
 
 char fourCheckers(char grid[6][7]){
     
@@ -229,6 +229,7 @@ int main(){
 
     printf("\nScores:\n\033[1;93mA: %d \033[0m- \033[1;31mB: %d \033[0m\n", pointsA, pointsB);
 }
+
 
 
 
