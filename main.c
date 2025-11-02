@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <time.h>
 #include "connect4.h"
+
 
 int main(){
     srand(time(NULL));
