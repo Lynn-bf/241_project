@@ -110,6 +110,60 @@ void inputWarning(char grid[6][7] , char player){
      
 }
 
+int checkForMedium(char grid[6][7], int deltaRow, int deltaCol) {
+    //horizontal: dr=1, dc=0
+    //vertical: dr=0, dc=1
+    //diagonal right: dr=1, dc=1
+    //diagonal left: dr=1, dc=-1
+    // Loop over all starting points for right diagonals of length 4
+    for (int row = 0; row <=6; row++) {       
+        for (int col = 0; col <7; col++) {   
+            
+            if(row+3*deltaRow<0 || row+3*deltaRow>=6 || col+3*deltaCol<0 || col+3*deltaCol>=7){
+                continue;
+            }
+            char c1 = grid[row][col];
+            char c2 = grid[row+1*deltaRow][col+deltaCol*1];
+            char c3 = grid[row+2*deltaRow][col+deltaCol*2];
+            char c4 = grid[row+3*deltaRow][col+deltaCol*3];
+
+            int botCount = (c1=='A') + (c2=='A') + (c3=='A') + (c4=='A');
+            int humanCount = (c1=='B') + (c2=='B') + (c3=='B') + (c4=='B');
+            int emptyCount = (c1==' ') + (c2==' ') + (c3==' ') + (c4==' ');
+
+            // Check for bot winning move
+            if (botCount == 3 && emptyCount == 1) {
+                int playCol = findPlayableDiagonalCell(row, col, grid, ' ', -1);
+                if (playCol != -1)
+                    return playCol;
+            }
+
+            // Check for human blocking move
+            if (humanCount == 3 && emptyCount == 1) {
+                int blockCol = findPlayableDiagonalCell(row, col, grid, ' ', -1);
+                if (blockCol != -1)
+                    return blockCol;
+            }
+        }
+    }
+  return -1; // no move found
+}
+
+// Helper function to find which cell in the diagonal is empty and playable
+int findPlayableDiagonalCell(int startRow, int startCol, char grid[6][7], char target, int deltaRow, int deltaCol) {
+    //
+    for (int i = 0; i < 4; i++) {
+        int row = startRow + deltaRow*i;
+        int col = startCol + deltaCol*i;
+        if (grid[row][col] == target) {
+            // Check if it's the lowest empty cell in its column
+            if (row == 5 || grid[row+1][col] != ' ')
+                return col;
+        }
+    }
+    return -1;  
+}
+
 void Multiplayer(char* win, char grid[6][7], bool A){
     char winner= *win;
     //looping until a winner is found or grid is full
@@ -154,6 +208,7 @@ void easyBot(char* win, char grid[6][7]) {
 
     *win = winner;
 }
+
 
 
 
