@@ -193,7 +193,6 @@ void easyBot(char* win, char grid[6][7]) {
         if (winner != ' ' || isGridFull(grid)) break;
 
         //  Bot's chooses a random column
-        srand(time(NULL));
         while (true) {
             int col = rand() % 7 + 1;
             int check = placeChecker(grid, col, 'B');
@@ -253,6 +252,7 @@ void mediumBot(char *win,char grid[6][7]){
         winner = fourCheckers(grid);
     }
 }
+
 
 
 
