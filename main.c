@@ -3,6 +3,8 @@
 #include "connect4.h"
 
 int main(){
+    srand(time(NULL));
+    
     printf("Welcome to Connect Four!");
 
     //printing the modes
@@ -55,8 +57,10 @@ int main(){
         else if(x==2){
             easyBot(win,grid);
         }
-        // other modes to be implemented in later sprints
-
+        else if(x==3){
+            mediumBot(win,grid);
+        }
+        
         if(winner!=' '){
             printf("\n\033[1;32mPlayer %c wins! \033[0m\n", winner); //display winner
             if(winner=='A') pointsA++;
