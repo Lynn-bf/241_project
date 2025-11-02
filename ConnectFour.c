@@ -149,8 +149,8 @@ int checkForMedium(char grid[6][7], int deltaRow, int deltaCol) {
   return -1; // no move found
 }
 
-// Helper function to find which cell in the diagonal is empty and playable
-int findPlayableDiagonalCell(int startRow, int startCol, char grid[6][7], char target, int deltaRow, int deltaCol) {
+// Helper function to find which cell is empty and playable
+int findPlayableCell(int startRow, int startCol, char grid[6][7], char target, int deltaRow, int deltaCol) {
     //
     for (int i = 0; i < 4; i++) {
         int row = startRow + deltaRow*i;
@@ -208,6 +208,7 @@ void easyBot(char* win, char grid[6][7]) {
 
     *win = winner;
 }
+
 
 
 
