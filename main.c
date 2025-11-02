@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <time.h>
-include <stdlib.h>
+#include <stdlib.h>
 #include "connect4.h"
 
 
