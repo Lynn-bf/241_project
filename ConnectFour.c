@@ -149,14 +149,14 @@ int checkForMedium(char grid[6][7], int deltaRow, int deltaCol) {
             if (botCount == 3 && emptyCount == 1) {
                 int playCol = findPlayableCell(row, col, grid, ' ', deltaRow, deltaCol);
                 if (playCol != -1)
-                    return playCol;
+                    return playCol+1;
             }
 
             // Check for human blocking move
             if (humanCount == 3 && emptyCount == 1) {
                 int blockCol = findPlayableCell(row, col, grid, ' ', deltaRow, deltaCol);
                 if (blockCol != -1)
-                    return blockCol;
+                    return blockCol+1;
             }
         }
     }
@@ -252,6 +252,7 @@ void mediumBot(char *win,char grid[6][7]){
     }
     *win = winner;
 }
+
 
 
 
