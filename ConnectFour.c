@@ -129,7 +129,7 @@ int findPlayableCell(int startRow, int startCol, char grid[6][7], char target, i
     }
     return -1;  
 }
-int checkForMedium(char grid[6][7], int deltaRow, int deltaCol) {
+int checkForMediumBot(char grid[6][7], int deltaRow, int deltaCol) {
     //horizontal: dr=1, dc=0
     //vertical: dr=0, dc=1
     //diagonal right: dr=1, dc=1
@@ -157,7 +157,34 @@ int checkForMedium(char grid[6][7], int deltaRow, int deltaCol) {
                     return playCol+1;
             }
 
-            // Check for human blocking move
+           
+        }
+    }
+  return -1; // no move found
+}
+
+checkForMediumHuman(char grid[6][7], int deltaRow, int deltaCol){
+     //horizontal: dr=1, dc=0
+    //vertical: dr=0, dc=1
+    //diagonal right: dr=1, dc=1
+    //diagonal left: dr=1, dc=-1
+    // Loop over all starting points for right diagonals of length 4
+    for (int row = 0; row <=6; row++) {       
+        for (int col = 0; col <7; col++) {   
+            
+            if(row+3*deltaRow<0 || row+3*deltaRow>=6 || col+3*deltaCol<0 || col+3*deltaCol>=7){
+                continue;
+            }
+            char c1 = grid[row][col];
+            char c2 = grid[row+1*deltaRow][col+deltaCol*1];
+            char c3 = grid[row+2*deltaRow][col+deltaCol*2];
+            char c4 = grid[row+3*deltaRow][col+deltaCol*3];
+
+            int botCount = (c1=='A') + (c2=='A') + (c3=='A') + (c4=='A');
+            int humanCount = (c1=='B') + (c2=='B') + (c3=='B') + (c4=='B');
+            int emptyCount = (c1==' ') + (c2==' ') + (c3==' ') + (c4==' ');
+
+             // Check for human blocking move
             if (humanCount == 3 && emptyCount == 1) {
                 int blockCol = findPlayableCell(row, col, grid, ' ', deltaRow, deltaCol);
                 if (blockCol != -1)
@@ -165,7 +192,8 @@ int checkForMedium(char grid[6][7], int deltaRow, int deltaCol) {
             }
         }
     }
-  return -1; // no move found
+    return -1; // no move found
+
 }
 
 void Multiplayer(char* win, char grid[6][7], bool A){
@@ -393,6 +421,7 @@ void hardBot(char *win, char grid[6][7]){
 
     *win = winner;
 }
+
 
 
 
