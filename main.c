@@ -63,6 +63,9 @@ int main(){
         else if(x==3){
             mediumBot(win,grid);
         }
+        else if(x==4){
+            hardBot(win, grid);
+        }
         
         if(winner!=' '){
             printf("\n\033[1;32mPlayer %c wins! \033[0m\n", winner); //display winner
