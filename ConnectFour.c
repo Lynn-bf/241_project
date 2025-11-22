@@ -1,3 +1,6 @@
+#ifdef _OPENMP
+#include <omp.h>
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -406,7 +409,8 @@ void hardBot(char *win, char grid[6][7]){
 
         int bestScore = NEG_INF;
         int bestCol = -1;
-
+        
+        #pragma omp parallel for 
         for(int i=0; i<=6; i++){
             char gridcpy[6][7];
             memcpy(gridcpy, grid, sizeof(gridcpy));
@@ -430,6 +434,7 @@ void hardBot(char *win, char grid[6][7]){
 
     *win = winner;
 }
+
 
 
 
