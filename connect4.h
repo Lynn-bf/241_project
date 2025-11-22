@@ -14,5 +14,6 @@ int findPlayableCell(int startRow, int startCol, char grid[6][7], char target, i
 void Multiplayer(char* win, char grid[6][7], bool A);
 void easyBot(char* win, char grid[6][7]);
 void mediumBot(char *win,char grid[6][7]);
+void hardBot(char *win, char grid[6][7]);
 
 #endif
