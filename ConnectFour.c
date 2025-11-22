@@ -163,7 +163,7 @@ int checkForMediumBot(char grid[6][7], int deltaRow, int deltaCol) {
   return -1; // no move found
 }
 
-checkForMediumHuman(char grid[6][7], int deltaRow, int deltaCol){
+int checkForMediumHuman(char grid[6][7], int deltaRow, int deltaCol){
      //horizontal: dr=1, dc=0
     //vertical: dr=0, dc=1
     //diagonal right: dr=1, dc=1
@@ -430,6 +430,7 @@ void hardBot(char *win, char grid[6][7]){
 
     *win = winner;
 }
+
 
 
 
