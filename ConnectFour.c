@@ -417,6 +417,7 @@ void hardBot(char *win, char grid[6][7]){
             int placed = placeChecker(gridcpy, i+1, 'B');
             if(placed==1){
                 int score = minimax(gridcpy, 6, NEG_INF, POS_INF, false);
+                #pragma omp critical
                 if(score>bestScore){
                     bestScore = score;
                     bestCol = i+1; //placeChecker expects columns between 1 and 7
@@ -434,6 +435,7 @@ void hardBot(char *win, char grid[6][7]){
 
     *win = winner;
 }
+
 
 
 
