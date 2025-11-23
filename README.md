@@ -73,4 +73,10 @@ Time Complexity:
 •	Best case: O(1) - immediate win/block found
 •	Worst case: O(7^d) where d=6 - full minimax search
 
+multithreading: 
+hard bot:
+evaluates all possible columns in parallel 
+each thread runs minimax on a different column 
+critical section safely selects the best move
+
 
