@@ -272,13 +272,15 @@ void mediumBot(char *win,char grid[6][7]){
                 break;
             }
         }
-        for (int i = 0; i < 4; i++) {
-            int dr = directions[i][0];
-            int dc = directions[i][1];
-            move = checkForMediumHuman(grid, dr, dc);
-            if (move != -1) {
-                placeChecker(grid, move, 'B');
-                break;
+        if (move == -1) {
+            for (int i = 0; i < 4; i++) {
+                int dr = directions[i][0];
+                int dc = directions[i][1];
+                move = checkForMediumHuman(grid, dr, dc);
+                if (move != -1) {
+                    placeChecker(grid, move, 'B');
+                    break;
+                }
             }
         }
         
@@ -461,4 +463,5 @@ void hardBot(char *win, char grid[6][7]){
 
     *win = winner;
 }
+
 
