@@ -415,7 +415,7 @@ void hardBot(char *win, char grid[6][7]){
                 char gridcpy[6][7];
                 memcpy(gridcpy, grid, sizeof(gridcpy));
                 int placed = placeChecker(gridcpy, i+1, 'B');
-                if(placed==1) && fourCheckers(gridcpy) == 'B'){
+                if(placed==1 && fourCheckers(gridcpy) == 'B'){
                     bestCol=i+1;
                     break;
                 }
@@ -461,3 +461,4 @@ void hardBot(char *win, char grid[6][7]){
 
     *win = winner;
 }
+
