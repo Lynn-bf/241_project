@@ -68,8 +68,7 @@ Hard Bot Function:
 •	First checks for immediate winning moves
 •	Then checks for urgent blocking moves against human
 •	Falls back to minimax search if no immediate threats
-•	Combines tactical urgency with strategic depth
-•	Uses same evaluation as minimax for consistency
+•	early termination when immediate threats/opportunities found
 Time Complexity:
 •	Best case: O(1) - immediate win/block found
 •	Worst case: O(7^d) where d=6 - full minimax search
