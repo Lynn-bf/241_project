@@ -409,37 +409,55 @@ void hardBot(char *win, char grid[6][7]){
 
         int bestScore = NEG_INF;
         int bestCol = -1;
-        
-        #pragma omp parallel for 
-        for(int i=0; i<=6; i++){
-            char gridcpy[6][7];
-            memcpy(gridcpy, grid, sizeof(gridcpy));
-            int placed = placeChecker(gridcpy, i+1, 'B');
-            if(placed==1){
-                int score = minimax(gridcpy, 6, NEG_INF, POS_INF, false);
-                #pragma omp critical
-                if(score>bestScore){
-                    bestScore = score;
-                    bestCol = i+1; //placeChecker expects columns between 1 and 7
+
+        while (1){
+            for(int i=0; i<=6; i++){
+                char gridcpy[6][7];
+                memcpy(gridcpy, grid, sizeof(gridcpy));
+                int placed = placeChecker(gridcpy, i+1, 'B');
+                if(placed==1) && fourCheckers(gridcpy) == 'B'){
+                    bestCol=i+1;
+                    break;
                 }
             }
+            if(bestCol != -1) break;
+                
+            for(int i=0; i<=6; i++){
+            char gridcpy[6][7];
+                memcpy(gridcpy, grid, sizeof(gridcpy));
+                int placed = placeChecker(gridcpy, i+1, 'A');
+                if(placed==1 && fourCheckers(gridcpy) == 'A'){
+                    bestCol=i+1;
+                    break;
+                }
+            }
+            
+            if(bestCol != -1) break;
+                
+            #pragma omp parallel for 
+            for(int i=0; i<=6; i++){
+                char gridcpy[6][7];
+                memcpy(gridcpy, grid, sizeof(gridcpy));
+                int placed = placeChecker(gridcpy, i+1, 'B');
+                if(placed==1){
+                    int score = minimax(gridcpy, 6, NEG_INF, POS_INF, false);
+                    #pragma omp critical
+                    if(score>bestScore){
+                        bestScore = score;
+                        bestCol = i+1; //placeChecker expects columns between 1 and 7
+                    }
+                }
+            }
+         break;
         }
-
         if(bestCol==-1) return;
 
         placeChecker(grid, bestCol, 'B');
         printf("\nBot (B) played:\n");
         displayGrid(grid);
         winner = fourCheckers(grid);
+       
     }
 
     *win = winner;
 }
-
-
-
-
-
-
-
-
